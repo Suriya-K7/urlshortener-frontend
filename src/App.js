@@ -6,7 +6,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import api from "./api/api";
-import CheckEmail from "./components/CheckEmail";
+import LoggedOut from "./components/LoggedOut";
 import PasswordReset from "./components/PasswordReset";
 import Password from "./components/Password";
 import Loggedin from "./components/Loggedin";
@@ -42,7 +42,6 @@ function App() {
       setToken(user.token);
     }
   }, []);
-
   // handle sign in
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -86,6 +85,7 @@ function App() {
   const handleLogout = () => {
     setToken(null);
     setLoggedUser(null);
+    setCount(0);
     navigate("/");
     localStorage.clear();
   };
@@ -188,7 +188,7 @@ function App() {
               />
             }
           />
-          {loggedUser && (
+          {loggedUser ? (
             <Route
               path="/user"
               element={
@@ -204,6 +204,8 @@ function App() {
                 />
               }
             />
+          ) : (
+            <Route path="/user" element={<LoggedOut />} />
           )}
           <Route
             path="/forgot"
@@ -216,7 +218,6 @@ function App() {
             }
           />
           <Route path="/created" element={<AccountCreated />} />
-          <Route path="/mail" element={<CheckEmail />} />
           <Route path="/password" element={<Password />} />
           <Route
             path="user/reset/:id"

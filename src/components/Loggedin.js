@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import api from "../api/api";
-import { ToastContainer, Zoom } from "react-toastify";
+import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FiLogOut } from "react-icons/fi";
 import { FaReact, FaLink, FaExternalLinkAlt } from "react-icons/fa";
 import DataContext from "../context/DataContext";
+import { useNavigate } from "react-router-dom";
 
 const Loggedin = ({
   loggedUser,
@@ -17,23 +18,34 @@ const Loggedin = ({
   setCount,
 }) => {
   const { width } = useContext(DataContext);
-
+  const navigate = useNavigate();
   const [shortenUrl, setShortenUrl] = useState();
-
-  const fetchedData = async () => {
-    const config = {
-      headers: { authorization: `bearer ${token}` },
-    };
-    const allShortenUrl = await api.get("user/url", config);
-    if (allShortenUrl) {
-      let length = allShortenUrl.data.length;
-      setCount(length);
-      setShortenUrl(allShortenUrl.data);
-    }
+  let allShortenUrl, length;
+  const config = {
+    headers: { authorization: `bearer ${token}` },
   };
   useEffect(() => {
     fetchedData();
   }, [handleURL]);
+  const fetchedData = async () => {
+    try {
+      allShortenUrl = await api.get("user/url", config);
+      console.log(1);
+      if (allShortenUrl) {
+        length = allShortenUrl.data.length;
+        setCount(length);
+        setShortenUrl(allShortenUrl.data);
+      }
+    } catch (error) {
+      if (error.response.data) {
+        toast.error(error.response.data.error);
+        navigate("/");
+      } else {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <div className="login">
       <nav className="navbar navbar-light bg-light px-2 d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
