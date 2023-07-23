@@ -26,7 +26,7 @@ const Loggedin = ({
   };
   useEffect(() => {
     fetchedData();
-  }, [handleURL]);
+  });
   const fetchedData = async () => {
     try {
       allShortenUrl = await api.get("user/url", config);
