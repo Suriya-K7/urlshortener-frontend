@@ -30,7 +30,6 @@ const Loggedin = ({
   const fetchedData = async () => {
     try {
       allShortenUrl = await api.get("user/url", config);
-      console.log(1);
       if (allShortenUrl) {
         length = allShortenUrl.data.length;
         setCount(length);

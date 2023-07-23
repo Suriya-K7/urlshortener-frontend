@@ -141,7 +141,6 @@ function App() {
     } else {
       alert("password not matching");
     }
-    console.log(resetToken);
   };
 
   // handle account confirming
