@@ -1,6 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext } from "react";
 import useWindowSize from "../hooks/useWindowSize";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const DataContext = createContext({});
 
