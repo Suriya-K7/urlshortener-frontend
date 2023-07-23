@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { FiLogOut } from "react-icons/fi";
 import { FaReact, FaLink, FaExternalLinkAlt } from "react-icons/fa";
 import DataContext from "../context/DataContext";
-// import useWindowSize from "../hooks/useWindowSize";
 
 const Loggedin = ({
   loggedUser,
@@ -17,8 +16,8 @@ const Loggedin = ({
   count,
   setCount,
 }) => {
-  // const { width } = useWindowSize();
   const { width } = useContext(DataContext);
+
   const [shortenUrl, setShortenUrl] = useState();
 
   const fetchedData = async () => {
