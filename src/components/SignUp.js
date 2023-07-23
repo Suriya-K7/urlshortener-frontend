@@ -28,6 +28,7 @@ const SignUp = ({
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="off"
           required
         />
         <small className="form-text text-muted"></small>
@@ -39,6 +40,7 @@ const SignUp = ({
           className="form-control"
           id="username"
           placeholder="Username"
+          autoComplete="off"
           required
           value={username}
           onChange={(e) => setUsername(e.target.value)}

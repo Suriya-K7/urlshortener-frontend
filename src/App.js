@@ -75,7 +75,6 @@ function App() {
     try {
       await api.post("user/url", data, config);
       setUrl("");
-      setCount((prev) => prev + 1);
       toast("URL shortened Successfully");
     } catch (error) {
       console.log(error);
